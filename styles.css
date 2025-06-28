@@ -1,0 +1,2874 @@
+/* CSS Variables */
+:root {
+    --primary-blue: #0f1c3f;
+    --secondary-blue: #1a3a6c;
+    --accent-blue: #4a8cff;
+    --light-blue: #6ecbf5;
+    --white: #ffffff;
+    --light-gray: #f5f7fa;
+    --dark-text: #0a172f;
+    --card-shadow: 0 10px 20px rgba(10, 25, 47, 0.1);
+    --dashboard-width: 350px;
+    --accent-red: #ff4d4d;
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+    transition: transform 0.4s ease;
+}
+
+body.dashboard-open {
+    overflow: hidden;
+}
+
+/* Header Styles */
+header {
+    background: rgba(10, 25, 47, 0.95);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo i {
+    font-size: 2.5rem;
+    color: var(--accent-blue);
+    margin-right: 10px;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--accent-blue), var(--light-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    color: #c5d6ff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    padding: 8px 15px;
+    border-radius: 4px;
+}
+
+nav ul li a:hover, 
+nav ul li a.active {
+    background: rgba(74, 140, 255, 0.2);
+    color: var(--white);
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-icon {
+    background: transparent;
+    border: none;
+    color: #c5d6ff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-icon:hover {
+    color: var(--accent-blue);
+    transform: scale(1.1);
+}
+
+.user-profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-blue), var(--light-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Search Container */
+.search-container {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+    margin: 0 20px;
+}
+
+.search-bar {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 5px 15px;
+    transition: all 0.3s ease;
+    align-items: center;
+}
+
+.search-bar:focus-within {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 2px var(--accent-blue);
+}
+
+#search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: 8px;
+    outline: none;
+    height: 100%;
+}
+
+#search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(15, 30, 60, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    margin-top: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+}
+
+/* Custom scrollbar for search results */
+.search-results::-webkit-scrollbar {
+    width: 8px;
+    background: rgba(10, 25, 47, 0.7);
+}
+
+.search-results::-webkit-scrollbar-thumb {
+    background: var(--accent-blue);
+    border-radius: 4px;
+}
+
+.search-result-item {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.search-result-item:hover {
+    background: rgba(74, 140, 255, 0.2);
+}
+
+.search-result-item img {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.search-result-info h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.search-result-info p {
+    font-size: 0.85rem;
+    color: var(--light-blue);
+}
+
+/* Notification System */
+.notification-container {
+    position: relative;
+    margin-right: 15px;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--accent-red);
+    color: white;
+    font-size: 0.7rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: none;
+}
+
+.notification-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 350px;
+    max-height: 500px;
+    background: rgba(15, 30, 60, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    overflow: hidden;
+    transform: translateY(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.notification-dropdown.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.notification-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+#mark-all-read {
+    background: transparent;
+    border: none;
+    color: var(--accent-blue);
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+#mark-all-read:hover {
+    text-decoration: underline;
+}
+
+.notification-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.notification-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.notification-list::-webkit-scrollbar-thumb {
+    background: rgba(74, 140, 255, 0.5);
+    border-radius: 3px;
+}
+
+.notification-item {
+    display: flex;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background: rgba(255,255,255,0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.notification-item.unread {
+    background: rgba(74, 140, 255, 0.1);
+}
+
+.notification-item:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.notification-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.notification-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-content h4 {
+    margin: 0 0 5px 0;
+    font-size: 0.95rem;
+    color: var(--white);
+}
+
+.notification-content p {
+    margin: 0 0 5px 0;
+    font-size: 0.85rem;
+    color: #a0b4e0;
+    line-height: 1.4;
+}
+
+.notification-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification-meta span {
+    font-size: 0.75rem;
+    color: #889bc9;
+}
+
+.unread-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-blue);
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+.empty-notifications {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--light-blue);
+}
+
+.empty-notifications i {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: var(--accent-blue);
+    opacity: 0.5;
+}
+
+.empty-notifications p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 70vh;
+    height: auto;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABQ8X2us2qpSLIZvmOs6egjAa41isMNbwP2ejCUm2r8ZTOjS9ErIgFsohDX8DklegiApl57EP30WiPWyWj3pVcVMg0sDuJjldCbKj.jpg?r=1bf?auto=format&q=50&fit=crop&fm=pjpg&dpr=2&crop=faces&h=600&w=1000') 
+                no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 600px;
+    animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero h2 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, var(--white), var(--light-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #c5d6ff;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, var(--accent-blue), var(--light-blue));
+    color: var(--white);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--white);
+    backdrop-filter: blur(10px);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Recommendations Section */
+.recommendations {
+    padding: 40px 5%;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-left: 20px;
+}
+
+.section-title i {
+    color: var(--accent-blue);
+}
+
+/* Featured Shows */
+.featured-shows {
+    padding: 40px 5%;
+}
+
+.shows-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.show-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: var(--card-shadow);
+    height: 180px; /* Horizontal card */
+    display: flex;
+    cursor: pointer;
+}
+
+.show-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.show-poster {
+    width: 40%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.show-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.show-card:hover .show-poster img {
+    transform: scale(1.1);
+}
+
+.show-info {
+    padding: 20px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.show-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.show-info .movies-count {
+    color: var(--light-blue);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.show-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    background: rgba(74, 140, 255, 0.2);
+    color: var(--white);
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    width: fit-content;
+}
+
+.show-btn:hover {
+    background: rgba(74, 140, 255, 0.4);
+}
+
+/* Featured Movies */
+.featured-movies {
+    padding: 40px 5%;
+}
+
+.movies-container {
+    display: none;
+}
+
+.movies-container.active {
+    display: block;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+/* Newest movies grid - 5 columns on large screens */
+.five-columns {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.movie-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: var(--card-shadow);
+}
+
+.movie-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.movie-poster {
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.movie-card:hover .movie-poster img {
+    transform: scale(1.1);
+}
+
+.movie-info {
+    padding: 15px;
+}
+
+.movie-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-info .genre {
+    color: var(--light-blue);
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.movie-info .rating {
+    display: flex;
+    align-items: center;
+    color: #ffd700;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    gap: 5px;
+}
+
+.action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.watch-btn {
+    display: block;
+    padding: 8px 15px;
+    background: rgba(74, 140, 255, 0.2);
+    color: var(--white);
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.watch-btn:hover {
+    background: rgba(74, 140, 255, 0.4);
+}
+
+.favorite-btn {
+    background: transparent;
+    border: none;
+    color: #ccc;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.favorite-btn.active {
+    color: #ff6b6b;
+}
+
+.badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: linear-gradient(90deg, #ff6b6b, #ff8e53);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 2;
+}
+
+/* Movie Player */
+.movie-player {
+    padding: 50px 5%;
+    background: rgba(10, 20, 35, 0.9);
+    border-radius: 15px;
+    margin: 40px 5%;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    display: none;
+}
+
+.movie-player.active {
+    display: block;
+}
+
+.player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.player-header h2 {
+    font-size: 1.8rem;
+    color: var(--white);
+}
+
+.player-header > div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.back-link {
+    color: var(--light-blue);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.video-container {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Enhanced User Dashboard */
+.dashboard-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px); /* Reduced blur */
+    z-index: 1001;
+    display: none;
+}
+
+.user-dashboard {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background: rgba(15, 30, 60, 0.85);
+    backdrop-filter: blur(10px) saturate(180%); /* Reduced blur */
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    z-index: 1002;
+    box-shadow: -5px 0 35px rgba(0, 0, 0, 0.6);
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.user-dashboard.open {
+    transform: translateX(0);
+}
+
+#close-dashboard {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    z-index: 10;
+}
+
+#close-dashboard:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.dashboard-content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.dashboard-header {
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.dashboard-header h2 {
+    font-size: 1.8rem;
+    background: linear-gradient(90deg, var(--accent-blue), var(--light-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.user-profile-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+.profile-avatar {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-blue), var(--light-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: white;
+}
+
+.profile-avatar::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--light-blue));
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(12px);
+    opacity: 0.5;
+}
+
+.online-status {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #4caf50;
+    border: 2px solid rgba(10, 25, 47, 0.8);
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.7);
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-info h3 {
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+    color: var(--white);
+}
+
+.profile-info p {
+    font-size: 0.95rem;
+    color: var(--light-blue);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.profile-info p i {
+    color: #ffd700;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 20px;
+    border-radius: 30px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item {
+    text-align: center;
+    position: relative;
+}
+
+.stat-item:not(:last-child):after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 30px;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.stat-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    display: block;
+    color: var(--white);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #a0b4e0;
+}
+
+.dashboard-section {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}
+
+.dashboard-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+}
+
+.section-header {
+    padding: 18px 25px;
+    background: rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.section-header:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.section-header h3 {
+    font-size: 1.3rem;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+}
+
+.section-header i {
+    color: var(--accent-blue);
+    background: rgba(74, 140, 255, 0.15);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+.section-body {
+    padding: 0 25px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.section-body.active {
+    max-height: 1000px;
+    padding: 25px;
+}
+
+/* Dashboard Card Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* More compact */
+    gap: 12px; /* Reduced gap */
+    width: 100%;
+    overflow: hidden;
+}
+
+.dashboard-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    position: relative;
+    height: 280px; /* Fixed height */
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-card img {
+    width: 100%;
+    height: 140px; /* Reduced height */
+    object-fit: cover;
+}
+
+.dashboard-card .card-content {
+    padding: 10px; /* Reduced padding */
+}
+
+.dashboard-card h4 {
+    font-size: 0.95rem; /* Slightly smaller */
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dashboard-card .meta {
+    font-size: 0.8rem; /* Smaller font */
+    color: var(--light-blue);
+    margin-bottom: 10px; /* Reduced margin */
+    display: flex;
+    justify-content: space-between; /* Space out rating and date */
+    align-items: center;
+}
+
+.watch-date {
+    color: var(--light-blue);
+    font-size: 0.75rem;
+}
+
+.dashboard-card .continue-btn {
+    display: block;
+    width: 100%;
+    padding: 6px 10px; /* Reduced padding */
+    background: linear-gradient(90deg, var(--accent-blue), var(--light-blue));
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.85rem; /* Smaller font */
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dashboard-card .continue-btn:hover {
+    background: linear-gradient(90deg, var(--light-blue), var(--accent-blue));
+}
+
+.history-list, 
+.favorites-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* More compact */
+    gap: 12px; /* Reduced gap */
+}
+
+.empty-message {
+    text-align: center;
+    padding: 40px 30px;
+    color: var(--light-blue);
+    font-style: italic;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 15px;
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    grid-column: 1 / -1;
+}
+
+.empty-message i {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: var(--accent-blue);
+    opacity: 0.6;
+}
+
+.empty-message h4 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--white);
+}
+
+/* Glass effect for cards */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Request Section */
+.request-section {
+    padding: 60px 5%;
+    background: rgba(10, 25, 47, 0.7);
+    margin-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.request-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.request-container h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.request-container p {
+    color: #c5d6ff;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.request-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.form-group {
+    flex: 1 1 300px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--white);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: var(--accent-blue);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.submit-btn {
+    background: linear-gradient(90deg, var(--accent-blue), var(--light-blue));
+    color: var(--white);
+    padding: 15px 40px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1 1 200px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+footer {
+    background: rgba(5, 15, 30, 0.95);
+    padding: 30px 5% 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+.copyright {
+    padding-top: 20px;
+    color: #a0b4e0;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero h2 {
+        font-size: 2.8rem;
+    }
+    
+    nav ul li {
+        margin-left: 15px;
+    }
+    
+    header {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .search-container {
+        order: 3;
+        max-width: 100%;
+        margin: 0;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    :root {
+        --dashboard-width: 300px;
+    }
+    
+    .five-columns {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    nav ul {
+        margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .hero {
+        height: auto;
+        padding: 40px 5%;
+        text-align: center;
+    }
+    
+    .hero-content {
+        margin: 0 auto;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .player-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .shows-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+    
+    .movie-poster {
+        height: 250px;
+    }
+    
+    .user-dashboard {
+        width: 100%;
+    }
+    
+    .notification-dropdown {
+        width: 300px;
+        right: -50px;
+    }
+    
+    /* Dashboard cards */
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .dashboard-card img {
+        height: 180px;
+    }
+    
+    .carousel-btn {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        padding-left: 15px;
+    }
+    
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+    }
+    
+    .movie-poster {
+        height: 200px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+    }
+    
+    .player-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .player-header > div {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    :root {
+        --dashboard-width: 280px;
+    }
+    
+    .notification-dropdown {
+        width: 280px;
+        right: -80px;
+    }
+    
+    /* Dashboard mobile optimization */
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .dashboard-card img {
+        height: 160px;
+    }
+    
+    .profile-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+    
+    .profile-info h3 {
+        font-size: 1.4rem;
+    }
+    
+    .stat-value {
+        font-size: 1.2rem;
+    }
+    
+    .dashboard-card .card-content {
+        padding: 10px;
+    }
+    
+    .dashboard-card h4 {
+        font-size: 0.85rem;
+    }
+    
+    .dashboard-card .continue-btn {
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+    
+    .five-columns {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Special mobile optimization for small screens */
+@media (max-width: 400px) {
+    .movies-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .search-container {
+        margin: 10px 0;
+    }
+    
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+        padding-left: 10px;
+    }
+    
+    .dashboard-card img {
+        height: 140px;
+    }
+}
+/* Source selector */
+.source-selector {
+    display: none;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.source-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.source-btn:hover {
+    background: rgba(74, 140, 255, 0.4);
+    transform: translateY(-3px);
+}
+
+.source-btn i {
+    font-size: 1.5rem;
+}
+
+/* Adjust newest additions layout */
+.newest-movies {
+    padding: 40px 5%;
+}
+
+.newest-movies .movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    margin: 0 auto;
+    max-width: 1500px;
+}
+
+/* Center the newest additions section */
+#newest-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+/* Player adjustments */
+.video-container {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#alt-source-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 20, 35, 0.9);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+#alt-source-container p {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+/* Adjust spacing for sections */
+.recommendations,
+.newest-movies,
+.featured-shows,
+.featured-movies {
+    padding: 40px 5%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .newest-movies .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .newest-movies .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .newest-movies .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .source-selector {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .source-btn {
+        width: 100%;
+    }
+}
+/* CSS Variables */
+:root {
+    --primary-blue: #0f1c3f;
+    --secondary-blue: #1a3a6c;
+    --accent-blue: #4a8cff;
+    --light-blue: #6ecbf5;
+    --white: #ffffff;
+    --light-gray: #f5f7fa;
+    --dark-text: #0a172f;
+    --card-shadow: 0 10px 20px rgba(10, 25, 47, 0.1);
+    --dashboard-width: 350px;
+    --accent-red: #ff4d4d;
+    --accent-green: #4caf50;
+    --accent-orange: #ff9800;
+}
+
+/* ... (existing styles remain the same) ... */
+
+/* Source Switcher */
+.source-switcher {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.source-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.source-group h3 {
+    color: var(--light-blue);
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.source-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.source-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--white);
+    padding: 10px 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.source-btn:hover {
+    background: rgba(74, 140, 255, 0.3);
+}
+
+.source-btn.active {
+    background: var(--accent-blue);
+    color: white;
+}
+
+.source-btn.download {
+    background: rgba(76, 175, 80, 0.15);
+}
+
+.source-btn.download:hover {
+    background: rgba(76, 175, 80, 0.3);
+}
+
+.source-btn.download.active {
+    background: var(--accent-green);
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 30px;
+    z-index: 2000;
+    font-size: 1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.toast i {
+    font-size: 1.2rem;
+}
+
+.toast.info {
+    border-left: 4px solid var(--accent-blue);
+}
+
+.toast.warning {
+    border-left: 4px solid var(--accent-orange);
+}
+
+/* ... (rest of existing styles remain the same) ... */
+
+/* Adjust source buttons for mobile */
+@media (max-width: 768px) {
+    .source-buttons {
+        flex-direction: column;
+    }
+    
+    .source-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+/* --- Dashboard Overlay & Container --- */
+.dashboard-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(3px);
+  z-index: 90;
+}
+.user-dashboard {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 360px;
+  max-width: 100%;
+  background: rgba(25, 25, 35, 0.75);
+  backdrop-filter: blur(12px) saturate(150%);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  z-index: 100;
+}
+
+/* Keep header always visible */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+.dashboard-header h2 {
+  color: #fff;
+  font-size: 1.25rem;
+}
+.btn-icon { color: #fff; font-size: 1.2rem; }
+
+/* Profile Section */
+.dashboard-profile {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.profile-avatar {
+  position: relative;
+  width: 60px; height: 60px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+.profile-avatar .online-status {
+  position: absolute;
+  bottom: 4px; right: 4px;
+  width: 12px; height: 12px;
+  background: #4ade80;
+  border: 2px solid rgba(25,25,35,0.75);
+  border-radius: 50%;
+}
+.profile-info h3, .profile-info p {
+  margin: 0;
+  color: #fff;
+}
+.profile-info p { font-size: 0.9rem; opacity: 0.85; }
+.profile-stats {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.profile-stats div {
+  text-align: center;
+  color: #fff;
+}
+.profile-stats strong { display: block; font-size: 1.1rem; }
+.profile-stats small { font-size: 0.75rem; opacity: 0.8; }
+
+/* History Section */
+.dashboard-history {
+  flex: 1;               /* fill remaining height */
+  display: flex;
+  flex-direction: column;
+}
+.dashboard-history h4 {
+  color: #fff;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+/* Grid of cards: 2 cols desktop, 1 on mobile */
+.history-grid {
+  flex: 1;               /* enable internal scroll */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+.history-grid::-webkit-scrollbar {
+  width: 4px;
+}
+.history-grid::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 2px;
+}
+
+/* Individual card */
+.history-card {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.history-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.history-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1.4;   /* portrait orientation */
+  object-fit: cover;
+}
+.history-card .card-body {
+  padding: 0.5rem;
+  color: #fff;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.card-body h5 {
+  font-size: 0.9rem;
+  margin: 0 0 0.25rem;
+  line-height: 1.2;
+}
+.card-body small {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  margin-bottom: auto;
+}
+.card-body .continue-btn {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.6rem;
+  background: rgba(255,255,255,0.2);
+  border-radius: 6px;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .history-grid {
+    grid-template-columns: 1fr;
+  }
+  .user-dashboard {
+    width: 100%;
+    max-width: none;
+  }
+}
+/* --- Dashboard Overlay & Container --- */
+.dashboard-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(3px);
+  z-index: 90;
+}
+.user-dashboard {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: 360px; max-width: 100%;
+  background: rgba(25,25,35,0.75);
+  backdrop-filter: blur(12px) saturate(150%);
+  display: flex; flex-direction: column;
+  padding: 1rem; z-index: 100;
+}
+
+/* Close button at top-right */
+.dashboard-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  color: #fff; font-size: 1.2rem;
+}
+
+/* Profile Section */
+.dashboard-profile {
+  display: flex; gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.profile-avatar {
+  position: relative; width: 60px; height: 60px;
+  background: rgba(255,255,255,0.2); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 1.5rem;
+}
+.online-status {
+  position: absolute; bottom: 4px; right: 4px;
+  width: 12px; height: 12px;
+  background: #4ade80;
+  border: 2px solid rgba(25,25,35,0.75);
+  border-radius: 50%;
+}
+.profile-info h3, .profile-info p {
+  margin: 0; color: #fff;
+}
+.profile-info p {
+  font-size: 0.9rem; opacity: 0.85;
+}
+.profile-stats {
+  display: flex; gap: 1rem; margin-top: 0.5rem;
+}
+.profile-stats div {
+  text-align: center; color: #fff;
+}
+.profile-stats strong {
+  display: block; font-size: 1.1rem;
+}
+.profile-stats small {
+  font-size: 0.75rem; opacity: 0.8;
+}
+
+/* Watch History Section */
+.dashboard-history {
+  flex: 1; display: flex; flex-direction: column;
+}
+.dashboard-history h4 {
+  color: #fff; margin-bottom: 0.75rem; font-size: 1rem;
+}
+
+/* Grid: 2 cols desktop, 1 on mobile */
+.history-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+.history-grid::-webkit-scrollbar {
+  width: 4px;
+}
+.history-grid::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 2px;
+}
+
+/* Card styling (supports your .dashboard-card class) */
+.dashboard-card {
+  display: flex; flex-direction: column;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  transition: transform .2s, box-shadow .2s;
+}
+.dashboard-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+.dashboard-card img {
+  width: 100%;
+  aspect-ratio: 1/1.5;
+  object-fit: cover;
+}
+.dashboard-card .card-body {
+  padding: 0.5rem;
+  display: flex; flex-direction: column;
+  flex: 1; color: #fff;
+}
+/* Two-line clamp for title */
+.dashboard-card .card-body h5 {
+  font-size: 0.9rem; line-height: 1.2;
+  margin: 0 0 0.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.dashboard-card .card-body small {
+  font-size: 0.75rem; opacity: 0.8;
+  margin-bottom: auto;
+}
+.dashboard-card .continue-btn {
+  margin-top: 0.5rem; align-self: flex-start;
+  padding: 0.3rem 0.6rem; font-size: 0.8rem;
+  background: rgba(255,255,255,0.2);
+  border-radius: 6px; text-decoration: none;
+  color: #fff;
+}
+
+/* Mobile single column */
+@media (max-width: 600px) {
+  .history-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Video Player tweaks --- */
+.player-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.5rem 1rem;
+}
+.player-header h2 {
+  font-size: 1rem; margin: 0; color: #fff;
+}
+.back-link {
+  color: #fff; text-decoration: none; font-size: 0.85rem;
+}
+.video-container {
+  position: relative; width: 100%; padding-top: 56.25%;
+}
+.video-container iframe {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%; border: none;
+}
+.player-controls {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.5rem 1rem;
+}
+.btn-sm {
+  padding: 0.4rem 0.8rem; font-size: 0.85rem;
+}
+/* — Tighten up the rating & date row — */
+.dashboard-card .meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--light-blue);
+  margin: 0.5rem 0;
+}
+
+.dashboard-card .meta .fa-star {
+  margin-right: 4px;
+  color: gold;
+}
+
+/* — Shrink & pin the Continue button — */
+.dashboard-card .continue-btn {
+  margin-top: auto;           /* push it down */
+  align-self: flex-start;     /* don’t stretch */
+  padding: 6px 12px;          /* tighter padding */
+  font-size: 0.85rem;
+  background: linear-gradient(90deg, var(--accent-blue), var(--light-blue));
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.dashboard-card .continue-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+/* -------------------------------------------------------------------------
+   Dashboard cards — meta row: rating & timestamp
+   ------------------------------------------------------------------------- */
+.dashboard-card .meta {
+  display: flex;
+  justify-content: space-between;  /* rating ↔ time */
+  align-items: center;
+  margin: 0.5rem 0;                /* vertical breathing room */
+  font-size: 0.85rem;              /* base size for the whole row */
+  color: var(--light-blue);        /* default for rating */
+}
+
+/* Star icon spacing & color */
+.dashboard-card .meta .fa-star {
+  margin-right: 4px;
+  color: gold;
+}
+
+/* If your HTML is like: <p class="meta"><i…></i><span>7.9/10</span><span>Jun 27…</span></p>
+   this targets the second <span> as the time: */
+.dashboard-card .meta span:last-child {
+  font-size: 0.75rem;             /* a bit smaller */
+  color: var(--gray);             /* more muted */
+  margin-left: 12px;              /* space from the rating */
+}
+/* =============================================================================
+   Request-Anime — Social & Links (Centered, Bigger Icons, Inline Buttons)
+   ============================================================================= */
+.request-anime .request-footer {
+  width: 100%;
+  margin: 2rem 0 0;
+  padding: 2rem 1rem;
+  background: inherit;             /* same bg as the section */
+  display: flex;
+  flex-direction: column;
+  align-items: center;             /* center everything */
+  gap: 2rem;
+}
+
+/* ── Social Icons ── */
+.request-footer .social-icons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.request-footer .social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  font-size: 2rem;                 /* bigger icons */
+  color: #8892b0;
+  text-decoration: none;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.request-footer .social-icons a:hover {
+  color: #64ffda;
+  transform: translateY(-3px);
+}
+
+/* ── Utility Links (Inline Buttons) ── */
+.request-footer .utility-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Primary button (filled) */
+.request-footer .utility-links a:first-child {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--accent-blue), var(--light-blue));
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Secondary button (outline) */
+.request-footer .utility-links a:last-child {
+  padding: 0.55rem 1.15rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--accent-blue);
+  border: 2px solid var(--accent-blue);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.request-footer .utility-links a:first-child:hover,
+.request-footer .utility-links a:last-child:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.request-footer .utility-links a:last-child:hover {
+  background: var(--accent-blue);
+  color: #fff;
+}
+/* =============================================================================
+   Request-Anime — inline outline buttons after social icons
+   ============================================================================= */
+.request-anime .request-footer .social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* remove underline on everything */
+.request-footer .social-icons a {
+  text-decoration: none;
+}
+
+/* outline‐style buttons for DMCA & Dead Link Report */
+.request-footer .social-icons a.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--accent-blue);
+  border: 2px solid var(--accent-blue);
+  border-radius: 6px;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+/* hover state matches your other outline buttons */
+.request-footer .social-icons a.btn-outline:hover {
+  background: var(--accent-blue);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+/* Override the generic social-icon sizing for outline buttons */
+.request-footer .social-icons a.btn-outline {
+  /* reset the forced square */
+  width: auto !important;
+  height: auto !important;
+
+  /* nice, readable padding & font */
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  line-height: 1.2;
+
+  /* uppercase outline style */
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--accent-blue);
+  border: 2px solid var(--accent-blue);
+  border-radius: 6px;
+
+  /* keep them in-line with a little space */
+  margin: 0 0.5rem;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.request-footer .social-icons a.btn-outline:hover {
+  background: var(--accent-blue);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ensure the rest of your social icons stay their original circular size */
+.request-footer .social-icons a:not(.btn-outline) {
+  width: 4rem;
+  height: 4rem;
+}
+/* Super-snug DMCA / Dead-Link buttons */
+.request-footer .social-icons a.btn-outline {
+  display: inline-flex;            /* allow centering without extra height */
+  align-items: center;             /* vertical center text */
+  justify-content: center;         /* horizontal center text */
+  height: auto !important;         /* let padding define the height */
+  padding: 0.15rem 0.5rem !important; /* very tight top/bottom, modest left/right */
+  line-height: 1 !important;       /* no extra line spacing */
+  margin: 0 0.2rem !important;     /* smaller gutters between buttons */
+  font-size: 0.85rem;              /* optional: slightly smaller text */
+}
+
+/* keep hover styling */
+.request-footer .social-icons a.btn-outline:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+/* 1) Reduce the space between *all* items (icons + buttons) */
+.request-footer .social-icons {
+  gap: 0.75rem !important;
+}
+
+/* 2) Undo the fixed square on the outline buttons */
+.request-footer .social-icons a.btn-outline {
+  width: auto !important;
+  height: auto !important;
+  padding: 0.25rem 0.5rem !important;  /* very snug top/bottom vs left/right */
+  line-height: 1 !important;           /* no extra line-height space */
+  font-size: 0.85rem;                  /* keeps text legible but small */
+}
+
+/* 3) (Optional) Slightly smaller lift on hover so it doesn’t jump too far */
+.request-footer .social-icons a.btn-outline:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+}
+/* 1. Make the footer‐icons container a tight, horizontal flex */
+.request-footer .social-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;               /* small gap between every item */
+  flex-wrap: wrap;           /* if space is tight, wrap onto next line */
+  margin-top: 1rem;          /* ensure some breathing room above */
+}
+
+/* 2. Target only the outline‐style utility links */
+.request-footer .social-icons a.btn-outline {
+  /* size to content */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  height: auto !important;
+
+  /* comfortable, rectangular padding */
+  padding: 0.4rem 0.8rem !important;
+  line-height: 1.1 !important;
+
+  /* outline look */
+  background: transparent !important;
+  border: 2px solid var(--accent-blue) !important;
+  border-radius: 4px !important;
+
+  /* text styling */
+  text-transform: uppercase !important;
+  font-size: 0.85rem !important;
+  color: var(--accent-blue) !important;
+  text-decoration: none !important;
+
+  /* reset any weird margins */
+  margin: 0 !important;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+/* 3. Hover/focus states for nice feedback */
+.request-footer .social-icons a.btn-outline:hover,
+.request-footer .social-icons a.btn-outline:focus {
+  background-color: var(--accent-blue) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+}
+
+/* 4. Keep your circular social‐icon links unchanged */
+.request-footer .social-icons a:not(.btn-outline) {
+  width: 4rem;
+  height: 4rem;
+}
+/* —— Mobile / Android-specific overrides —— */
+@media only screen and (max-width: 768px) {
+  /* 1. Make header elements stack, shrink logo/nav */
+  header {
+    flex-wrap: wrap;
+    padding: 10px 5%;
+  }
+  .logo {
+    flex: 1 1 100%;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  nav {
+    flex: 1 1 100%;
+  }
+  nav ul {
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  nav ul li {
+    margin: 5px;
+  }
+  .search-container {
+    order: 3;
+    flex: 1 1 100%;
+    margin: 10px 0;
+  }
+
+  /* 2. Collapse hero text & buttons */
+  .hero h2 {
+    font-size: 2.2rem;
+    text-align: center;
+  }
+  .hero p {
+    font-size: 1rem;
+    text-align: center;
+  }
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hero-buttons .btn {
+    width: 100%;
+  }
+
+  /* 3. Single‑column grids everywhere */
+  .movies-grid,
+  .shows-grid,
+  .history-grid,
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 4. Movie/Show cards shrink & adapt */
+  .movie-card,
+  .show-card,
+  .dashboard-card {
+    margin: 0 auto;
+    max-width: 90%;
+  }
+  .movie-poster,
+  .show-poster img,
+  .dashboard-card img {
+    height: auto;
+    width: 100%;
+  }
+
+  /* 5. Simplify section titles */
+  .section-title {
+    font-size: 1.5rem;
+    padding-left: 10px;
+    gap: 8px;
+  }
+
+  /* 6. Nav “My List” badge smaller */
+  .notification-badge {
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+  }
+
+  /* 7. Source‑switcher buttons full‑width blocks */
+  .source-group .source-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .source-group .source-btn {
+    width: 100%;
+  }
+
+  /* 8. Reduce padding/margins everywhere */
+  section,
+  .movie-player,
+  .recommendations,
+  .newest-movies,
+  .featured-shows {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  .movie-player {
+    margin: 20px 5%;
+  }
+
+  /* 9. Footer / any extra margins */
+  body {
+    font-size: 14px;
+  }
+}
+/* —— True Mobile / Android Overrides (≤768px) —— */
+@media only screen and (max-width: 768px) {
+  /* 1) Request‑Anime form & socials */
+  .request-section .request-form input,
+  .request-section .request-form .submit-btn {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .request-section .request-footer .social-icons {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .request-section .request-footer .social-icons a {
+    flex: 0 0 auto;
+    margin: 0 6px;
+  }
+  .request-section .request-footer .social-icons i {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  /* 2) Two‑column grids for all carousels */
+  .movies-grid,
+  .shows-grid,
+  .history-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  /* 3) Ensure cards shrink to fit side‑by‑side */
+  .movies-grid .movie-card,
+  .shows-grid .show-card,
+  .history-grid .dashboard-card {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .movies-grid img,
+  .shows-grid img,
+  .history-grid img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* 4) Hero / “Start Watching” buttons full‑width */
+  .hero-buttons {
+    flex-direction: column !important;
+    gap: 8px;
+  }
+  .hero-buttons .btn {
+    width: 100% !important;
+  }
+}
+/* ——— Final Android fixes (≤768px) ——— */
+@media only screen and (max-width: 768px) {
+  /* 1) Keep all social icons on one line in Request‑Anime */
+  .request-section .request-footer .social-icons {
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+  }
+  .request-section .request-footer .social-icons a {
+    margin: 0 0.5rem !important;
+  }
+
+  /* 2) Two‑up grid for Featured Shows */
+  .featured-shows .shows-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+  /* Make each show‑card stack vertically so it fits */
+  .featured-shows .show-card {
+    flex-direction: column !important;
+    height: auto !important;
+  }
+  .featured-shows .show-poster,
+  .featured-shows .show-info {
+    width: 100% !important;
+    padding: 8px !important;
+  }
+
+  /* 3) Restore hero buttons side‑by‑side */
+  .hero .hero-buttons {
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 10px !important;
+  }
+
+  /* 4) Bring search bar back inline in header */
+  header .search-container {
+    order: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    margin: 0 20px !important;
+  }
+
+  /* 5) Ensure Continue buttons show in full on dashboard cards */
+  .dashboard-card .continue-btn {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+}
+/* === Mobile header & search reflow === */
+@media (max-width: 768px) {
+  header {
+    flex-wrap: wrap;
+    padding: 10px 5%;
+  }
+  /* First row: logo / nav / actions */
+  .logo,
+  nav,
+  .user-actions {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+  }
+  nav {
+    order: 2;
+    justify-content: center;
+  }
+  .user-actions {
+    order: 3;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  /* Second row: full‑width search bar */
+  .search-container {
+    order: 4;
+    flex: 1 1 100%;
+    max-width: none;
+    margin: 10px 0 0;
+  }
+  .search-bar {
+    width: 100%;
+  }
+}
+
+/* === Mobile dashboard & cards auto‑height === */
+@media (max-width: 768px) {
+  /* Make the sliding panel full width */
+  .user-dashboard {
+    width: 100% !important;
+    max-width: none;
+  }
+  /* Allow the dashboard cards to grow so the Continue button is visible */
+  .dashboard-card {
+    height: auto !important;
+    min-height: 280px;        /* keep a reasonable minimum */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .dashboard-card img {
+    height: auto;             /* let the poster size itself */
+    max-height: 140px;        /* optional cap */
+  }
+  .dashboard-card .card-content {
+    padding: 10px;
+    flex: 1 1 auto;
+  }
+}
+/* ——— Final Android fixes (≤768px) ——— */
+@media only screen and (max-width: 768px) {
+  /* … */
+  /* 4) Bring search bar back inline in header */
+  header .search-container {
+    order: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    margin: 0 20px !important;
+  }
+  /* … */
+}
+@media (max-width: 768px) {
+  header {
+    display: grid !important;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "logo . actions"
+      "menu menu menu"
+      "search search search";
+    column-gap: 8px;
+    row-gap: 6px;    /* tighter vertical spacing */
+    align-items: center;
+    padding: 8px 16px;
+  }
+
+  /* Row 1: logo on left, icons on right */
+  header .logo {
+    grid-area: logo;
+  }
+  header .user-actions {
+    grid-area: actions;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  /* Row 2: nav links centered full‑width */
+  header nav {
+    grid-area: menu;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  /* Row 3: search bar full‑width, pulled up by zero margin */
+  header .search-container {
+    grid-area: search;
+    width: 100%;
+    margin: 0;
+  }
+}
+@media (max-width: 768px) {
+  /* …your existing header grid settings… */
+
+  /* Row 2: make nav full‑width, center its contents, allow scroll if absolutely needed */
+  header nav {
+    grid-area: menu;
+    width: 100%;
+    overflow-x: auto;       /* lets it scroll if it still somehow overflows */
+  }
+
+  /* Force the UL to a flex container with minimal gaps */
+  header nav ul {
+    display: flex !important;
+    justify-content: center;
+    gap: 6px !important;    /* shrink gap between items */
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;     /* no wrapping */
+  }
+
+  /* Each LI only as wide as its text */
+  header nav ul li {
+    flex: 0 0 auto;
+  }
+
+  /* Make the links themselves a bit more compact */
+  header nav ul li a {
+    display: block;
+    padding: 4px 6px;        /* smaller touch area, but still tappable */
+    font-size: 0.9rem;       /* slightly smaller text */
+    white-space: nowrap;
+  }
+}
+/* Make the header stick to the top on scroll */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;              /* sit above all other content */
+}
+
+/* Push the page content down so it isn’t hidden under the header */
+main, .hero, .content-wrapper {
+  margin-top: 70px;           /* match roughly your header’s height */
+}
+/* 1) Keep the header fixed */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* 2) Remove the old margin-top hack */
+main, .content-wrapper {
+  margin-top: 0 !important;
+  padding-top: 70px;    /* same height as your header */
+}
+
+/* If .hero is a direct child of main, you can target it too: */
+.hero {
+  /* 3) Make sure you see the very top of the image */
+  background-position: center top !important;
+  background-size: cover !important;
+  
+  /* 4) Add extra vertical space so the search bar never hugs the end */
+  min-height: 75vh;
+  padding-bottom: 40px;
+}
+/* 1) Nudge the hero background further down (so its top shows less and bottom more) */
+.hero {
+  /* e.g. move the focus point 25% down from the top */
+  background-position: center 25% !important;
+}
+
+/* 2) Make sure the dashboard overlay & panel sit above the header */
+#dashboard-overlay {
+  z-index: 1050;   /* anywhere between header (1000) and dashboard panel (1100) */
+}
+.user-dashboard {
+  z-index: 1100;   /* above the header’s 1000 */ 
+}
+@media (max-width: 768px) {
+  /* 1) Push the entire hero section down */
+  section.hero {
+    /* undo any fixed heights, then add top‑padding */
+    height: auto !important;
+    padding-top: 60px !important;    /* try 50–70px to taste */
+  }
+
+  /* 2) Nudge the text/buttons grouping further down */
+  section.hero .hero-content {
+    margin-top: 40px !important;     /* try 30–50px to center vertically */
+  }
+
+  /* 3) Extra space above the buttons */
+  section.hero .hero-buttons {
+    margin-top: 30px !important;     /* gives the call‑to‑action room */
+  }
+}
+@media (max-width: 768px) {
+  /* more breathing room under the search bar */
+  header {
+    padding-bottom: 28px;      /* increase this value to taste */
+  }
+
+  header .search-container {
+    margin-bottom: 20px;       /* extra gap before the hero section */
+  }
+}
+@media (max-width: 768px) {
+  /* 1) Push the hero section down by the same 28+20=48px */
+  section.hero {
+    margin-top: 48px !important;   /* keeps the spacing uniform */
+  }
+
+  /* 2) Ensure the hero never collapses shorter than the viewport */
+  section.hero {
+    min-height: calc(100vh - 48px) !important;
+  }
+}
+@media (max-width: 768px) {
+  section.hero {
+    /* remove the forced full‑height */
+    margin-top: 48px !important;  
+    min-height: auto !important;   /* let content define the height */
+    padding-bottom: 20px !important; /* small gap under the buttons */
+  }
+}
+@media (max-width: 768px) {
+  /* 1) Keep header spacing reasonable */
+  header {
+    padding-bottom: 16px !important;
+  }
+  header .search-container {
+    margin-bottom: 16px !important;
+  }
+
+  /* 2) Give the hero lots of top padding so nothing gets cut */
+  section.hero {
+    /* ensure we’re not forcing a fixed height */
+    height: auto !important;
+    min-height: auto !important;
+
+    /* generous padding above & below content */
+    padding: 60px 16px 40px !important;  
+    background-position: center top !important;
+    background-size: cover !important;
+    overflow: visible !important;
+  }
+
+  /* 3) Slightly smaller headline that’s easier to fit */
+  section.hero .hero-content h1 {
+    font-size: 1.6rem !important;  
+    line-height: 1.3 !important;
+    margin: 0 0 16px !important;
+  }
+
+  /* 4) Give a little room above the description/buttons */
+  section.hero .hero-content {
+    margin-top: 20px !important;
+  }
+}
+@media (max-width: 768px) {
+  section.hero {
+    /* 1) Push the entire hero way below the header */
+    margin-top: 120px !important;
+
+    /* 2) Extra breathing room before the headline */
+    padding-top: 30px !important;
+
+    /* 3) Shift the background down so it still centers nicely */
+    background-position: center 50% !important;
+  }
+}
+@media (max-width: 768px) {
+  section.hero {
+    /* Double the previous push so it’s really fully visible */
+    margin-top: 240px !important;      /* was 120px, now 240px */
+    padding-top: 60px !important;       /* was 30px, now 60px */
+    background-position: center 60% !important; /* shift the image down too */
+  }
+}
+@media (max-width: 768px) {
+  section.hero {
+    margin-top: 160px !important;      /* reduced from 240px down to 160px */
+    padding-top: 40px !important;       /* reduced from 60px down to 40px */
+    background-position: center 50% !important; /* slight shift so image stays centered */
+  }
+}
+/* Video player: smaller, neatly‑aligned Watch & Download buttons on mobile */
+@media (max-width: 768px) {
+  .video-player .controls {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 8px 0 !important;
+  }
+
+  .video-player .controls .btn-watch,
+  .video-player .controls .btn-download {
+    flex: 0 0 auto !important;       /* no stretching */
+    padding: 6px 12px !important;    /* smaller tap area */
+    font-size: 0.85rem !important;    /* compact text */
+    border-radius: 4px !important;    /* tighter corners */
+    margin: 0 !important;             /* remove any extra spacing */
+  }
+}

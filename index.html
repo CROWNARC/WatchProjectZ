@@ -1,0 +1,258 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ProjectZ - Premium Anime Streaming</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo"><i class="fas fa-play-circle"></i><h1>ProjectZ</h1></div>
+    <div class="search-container">
+      <div class="search-bar">
+        <input id="search-input" type="text" placeholder="Search anime…">
+        <button id="search-btn" class="btn-icon"><i class="fas fa-search"></i></button>
+      </div>
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#" id="movies-link">Movies</a></li>
+        <li><a href="#" id="new-link">New Releases</a></li>
+        <li><a href="#" id="list-link">My List</a></li>
+      </ul>
+    </nav>
+    <div class="user-actions">
+      <div class="notification-container">
+        <button id="notif-btn" class="btn-icon">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">0</span>
+        </button>
+        <div class="notification-dropdown">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button id="mark-all-read">Mark all as read</button>
+          </div>
+          <div class="notification-list"></div>
+        </div>
+      </div>
+      <div id="user-profile" class="user-profile"><i class="fas fa-user"></i></div>
+    </div>
+  </header>
+
+ <!-- Dashboard Overlay & Panel -->
+<div id="dashboard-overlay" class="dashboard-overlay"></div>
+<aside id="user-dashboard" class="user-dashboard">
+ <!-- Close button -->
+  <button id="close-dashboard" class="btn-icon dashboard-close">
+    <i class="fas fa-times"></i>
+  </button>
+  
+
+  <!-- Profile Section -->
+  <section class="dashboard-profile">
+    <div class="profile-avatar">
+      <i class="fas fa-user"></i>
+      <span class="online-status"></span>
+    </div>
+    <div class="profile-info">
+      <h3>AnimeLover</h3>
+      <p><i class="fas fa-star"></i> Test Phase V1</p>
+      <div class="profile-stats">
+        <div><strong id="stats-movies">5</strong><small>Movies</small></div>
+        <div><strong id="stats-hours">0</strong><small>Hours</small></div>
+        <div><strong id="stats-lists">0</strong><small>Lists</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Watch History Grid -->
+  <section class="dashboard-history">
+    <h4><i class="fas fa-history"></i> Watch History</h4>
+    <div id="history-list" class="history-grid">
+      <!-- Your app.js will inject <div class="dashboard-card">…</div> items here -->
+    </div>
+  </section>
+</aside>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h2>Unlimited Anime Entertainment</h2>
+            <p>Stream thousands of anime movies and series in HD quality. Anytime, anywhere. No ads, no interruptions.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" id="start-watching-btn"><i class="fas fa-play"></i> Start Watching</button>
+                <button class="btn btn-secondary" id="dashboard-btn"><i class="fas fa-user"></i> Dashboard</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Recommendations Section -->
+    <section class="recommendations">
+        <h2 class="section-title"><i class="fas fa-random"></i> Recommendations For You</h2>
+        <div class="movies-grid" id="recommendations-container">
+            <!-- Recommendations will be populated by JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Newest Movies -->
+    <section class="newest-movies" id="newest-section">
+        <h2 class="section-title"><i class="fas fa-crown"></i> Newest Additions</h2>
+        <div class="movies-grid" id="newest-container">
+            <!-- Newest movies will be populated by JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Featured Shows -->
+    <section class="featured-shows" id="featured-shows">
+        <h2 class="section-title"><i class="fas fa-fire"></i> Featured Anime Shows</h2>
+        <div class="shows-grid" id="shows-container">
+            <!-- Shows will be populated by JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Movies Sections -->
+    <section class="featured-movies">
+        <div class="movies-container active" id="doraemon-movies">
+            <h2 class="section-title"><i class="fas fa-dragon"></i> Doraemon Movies</h2>
+            <div class="movies-grid" id="doraemon-container">
+                <!-- Doraemon movies will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="movies-container" id="shinchan-movies">
+            <h2 class="section-title"><i class="fas fa-child"></i> Shinchan Movies</h2>
+            <div class="movies-grid" id="shinchan-container">
+                <!-- Shinchan movies will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="movies-container" id="pokemon-movies">
+            <h2 class="section-title"><i class="fas fa-bolt"></i> Pokémon Movies</h2>
+            <div class="movies-grid" id="pokemon-container">
+                <!-- Pokemon movies will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- My List Section -->
+        <div class="movies-container" id="my-list">
+            <h2 class="section-title"><i class="fas fa-heart"></i> My List</h2>
+            <div class="movies-grid" id="my-list-container">
+                <!-- Favorited movies will appear here -->
+            </div>
+            <div id="empty-list-message" style="text-align: center; padding: 40px; display: none;">
+                <i class="fas fa-heart-broken" style="font-size: 3rem; color: var(--accent-blue); margin-bottom: 20px;"></i>
+                <h3>Your list is empty</h3>
+                <p>Add movies to your list by clicking the heart icon</p>
+            </div>
+        </div>
+        
+        <!-- Movie Player -->
+        <div class="movie-player" id="movie-player">
+  <div class="player-header">
+    <h2 id="player-title">Doraemon: Treasure Island</h2>
+    <div class="player-controls">
+      <button class="btn-icon" id="fullscreen-btn">
+        <i class="fas fa-expand"></i>
+      </button>
+      <a href="#" class="back-link" id="close-player">
+        <i class="fas fa-arrow-left"></i> Back to Movies
+      </a>
+    </div>
+  </div>
+
+  <div class="video-container" id="video-container">
+    <iframe id="embedded-player" src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    <div id="alt-source-container" class="alt-source" style="display:none;">
+      <p>This video is hosted externally. Click below to watch or download.</p>
+      <a id="alt-source-link" href="#" target="_blank" class="btn btn-primary">Open Link</a>
+    </div>
+  </div>
+
+  <!-- Moved switcher/buttons below the video -->
+  <div class="source-switcher" id="source-switcher">
+    <div class="source-group">
+      <h3>Watch:</h3>
+      <div class="source-buttons">
+        <button class="source-btn active" data-type="dailymotion"><i class="fab fa-dailymotion"></i> Dailymotion</button>
+        <button class="source-btn" data-type="youtube"><i class="fab fa-youtube"></i> YouTube</button>
+        <button class="source-btn" data-type="facebook"><i class="fab fa-facebook"></i> Facebook</button>
+      </div>
+    </div>
+    <div class="source-group">
+      <h3>Download:</h3>
+      <div class="source-buttons">
+        <button class="source-btn download" data-type="drive"><i class="fab fa-google-drive"></i> Drive</button>
+        <button class="source-btn download" data-type="mediafire"><i class="fas fa-cloud-download-alt"></i> Mediafire</button>
+        <button class="source-btn download" data-type="mega"><i class="fas fa-database"></i> Mega</button>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+    
+    <!-- Request Section -->
+    <section class="request-section">
+        <div class="request-container">
+            <h2>Request Anime</h2>
+            <p>Can't find your favorite anime? Let us know what you'd like to see on ProjectZ and we'll consider adding it to our collection.</p>
+            
+            <form class="request-form" id="request-form">
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Anime Title" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Link (Optional)">
+                </div>
+                <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+<!-- ── Social + Utility Row (now INSIDE the same section) ── -->
+  <div class="request-footer">
+  <div class="social-icons">
+    <a href="#" aria-label="Discord" title="Discord (Source Not Found)">
+      <i class="fab fa-discord"></i>
+    </a>
+    <a href="#" aria-label="Twitter" title="Twitter (Source Not Found)">
+      <i class="fab fa-twitter"></i>
+    </a>
+    <a href="#" aria-label="YouTube" title="YouTube (Source Not Found)">
+      <i class="fab fa-youtube"></i>
+    </a>
+    <a href="#" aria-label="Instagram" title="Instagram (Source Not Found)">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="#" aria-label="Reddit" title="Reddit (Source Not Found)">
+      <i class="fab fa-reddit"></i>
+    </a>
+
+    <!-- Inline outline‐style utility buttons -->
+    <a href="DMCA.html" class="btn-outline">DMCA</a>
+    <a href="links.html" class="btn-outline">Dead Link Report</a>
+  </div>
+</div>
+
+</section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="copyright">
+            <p>&copy; 2025 ProjectZ. All rights reserved. This site does not store any files on its server. All contents are provided by non-affiliated third parties.</p>
+        </div>
+    </footer>
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+    
+  <script src="data.js"></script>
+  <script src="notifications.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
