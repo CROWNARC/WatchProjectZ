@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Dead Link - ProjectZ</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      /* updated background image */
+      background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('https://wallpapers.com/images/hd/dark-anime-scenery-wot9wg412s7h8yxa.jpg') center top/cover no-repeat fixed;
+    }
+    .report-container {
+      margin: 120px auto 40px;
+      max-width: 600px;
+      padding: 40px;
+      background: rgba(10,20,35,0.9);
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      color: var(--white);
+    }
+    /* static status box below form */
+    .status-box {
+      display: none;
+      margin-top: 20px;
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border-left: 4px solid #48c774;
+      padding: 15px 20px;
+      border-radius: 5px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      color: #fff;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    .status-box.error { border-left-color: #f14668; }
+    .status-box i { margin-right: 8px; }
+    .report-container h2 { font-size: 2rem; text-align: center; margin-bottom: 20px; }
+    .report-container form label { display: block; margin: 15px 0 5px; }
+    .report-container form input,
+    .report-container form textarea {
+      width: 100%; padding: 10px; border: none; border-radius: 5px;
+      font-size: 1rem; background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1); color: var(--white);
+    }
+    .report-container form input:focus,
+    .report-container form textarea:focus {
+      border-color: rgba(255,255,255,0.3);
+      box-shadow: 0 0 8px rgba(255,255,255,0.1);
+      outline: none;
+    }
+    .submit-btn {
+      margin-top: 20px; width: 100%; padding: 12px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15);
+      color: white; font-weight: 600; border-radius: 0.5rem;
+      font-size: 1rem; transition: transform .3s, background .3s, border-color .3s;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+    }
+    .submit-btn:hover {
+      background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3);
+      transform: translateY(-2px); cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><i class="fas fa-play-circle"></i><h1>ProjectZ</h1></div>
+    <nav><ul><li><a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a></li></ul></nav>
+  </header>
+
+  <section class="report-container">
+    <h2>Report a Broken Link</h2>
+    <form id="deadlink-form">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="url">Broken URL</label>
+      <input type="url" id="url" name="url" placeholder="https://example.com/movie" required />
+
+      <label for="message">Additional Details</label>
+      <textarea id="message" name="message" rows="4" placeholder="Any extra info..."></textarea>
+
+      <button type="submit" class="submit-btn"><i class="fas fa-exclamation-triangle"></i> Submit Report</button>
+    </form>
+    <div id="status-box" class="status-box"><i class="fas fa-info-circle"></i><span id="status-message"></span></div>
+  </section>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!window.emailjs) {
+        alert('Error loading EmailJS SDK.');
+        return;
+      }
+      emailjs.init('y7_NNi0mZ5SMrJBzk');
+      const form = document.getElementById('deadlink-form');
+      const statusBox = document.getElementById('status-box');
+      const statusMsg = document.getElementById('status-message');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        showStatus('⏳ Sending report…', false);
+        emailjs.sendForm('service_z5rfp68', 'template_xmq3l8p', this)
+          .then(() => showStatus('✅ Report sent—thank you!', false))
+          .catch((err) => {
+            console.error('EmailJS error:', err);
+            showStatus('❌ Unable to send report.', true);
+          });
+        this.reset();
+      });
+
+      function showStatus(msg, isError) {
+        statusMsg.textContent = msg;
+        statusBox.className = 'status-box' + (isError ? ' error' : '');
+        statusBox.style.display = 'block';
+        clearTimeout(statusBox.hideTimeout);
+        statusBox.hideTimeout = setTimeout(() => statusBox.style.display = 'none', 5000);
+      }
+    });
+  </script>
+</body>
+</html>
