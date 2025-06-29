@@ -14,7 +14,14 @@ const notifications = [
   date: new Date().toISOString(),
   image: "https://i.pinimg.com/originals/e3/ee/f0/e3eef0b4441925a54923dc00f7ef7d36.gif",
   read: false
-}
+ },
+ {
+  id: 3,
+  title: "Report Link Section Added",
+  message: ` I have fixed the issue with the report link not working and added the entire section. It is now working properly. Thank you!`,
+  date: new Date().toISOString(),
+  read: false
+  }
 ];
 
 // Initialize notifications
