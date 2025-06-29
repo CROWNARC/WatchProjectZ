@@ -26,15 +26,28 @@ const notifications = [
 
 // Initialize notifications
 function initNotifications() {
-  let storedNotifications = JSON.parse(localStorage.getItem('notifications'));
-  
-  if (!storedNotifications || storedNotifications.length === 0) {
-    localStorage.setItem('notifications', JSON.stringify(notifications));
-    storedNotifications = notifications;
+  // load whatever’s in localStorage now
+  let storedNotifications = JSON.parse(localStorage.getItem('notifications')) || [];
+
+  if (storedNotifications.length === 0) {
+    // first‑ever visit: seed from our built‑in list
+    storedNotifications = notifications.slice();
+  } else {
+    // subsequent visits: merge in any new built‑in items by id
+    notifications.forEach(n => {
+      if (!storedNotifications.some(sn => sn.id === n.id)) {
+        storedNotifications.push(n);
+      }
+    });
   }
-  
+
+  // save back up (whether seeded or merged)
+  localStorage.setItem('notifications', JSON.stringify(storedNotifications));
+
+  // now repaint badge
   updateNotificationBadge();
 }
+
 
 // Add new notification
 function addNotification(title, message, image = null) {
