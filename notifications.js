@@ -3,7 +3,8 @@ const NOTIFICATION_VERSION = 1;
 const notifications = [
   { id: 1, title: "New Feature Added!", message: "You can now request new anime to be added to our collection", date: new Date(Date.now() - 259200000).toISOString(), read: false },
   { id: 2, title: "Platform in Testing Phase", message: `Welcome to the early release of our web platform! Please be aware that this site is currently in V1 testing, and many features are still under development. At the moment, we’re only integrated with the Dailymotion model. Your feedback is invaluable—if you encounter any issues or missing functionality, please let us know so we can improve. In the next testing phase, we plan to introduce an enhanced model and additional capabilities. Thank you for helping us build a better experience!`, date: new Date().toISOString(), image: "https://i.pinimg.com/originals/e3/ee/f0/e3eef0b4441925a54923dc00f7ef7d36.gif", read: false },
-  { id: 3, title: "Report Link Section Added", message: `I have fixed the issue with the report link not working and added the entire section. It is now working properly. Thank you!`, date: new Date().toISOString(), read: false }
+  { id: 3, title: "Report Link Section Added", message: `I have fixed the issue with the report link not working and added the entire section. It is now working properly. Thank you!`, date: new Date().toISOString(), read: false },
+  { id: 4, title: "Improving UI", message: "for better looks and experience", date: new Date().toISOString(), read: false }
 ];
 
 function initNotifications() {
